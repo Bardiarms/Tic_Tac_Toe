@@ -1,17 +1,26 @@
 from socket import AF_INET, SOCK_STREAM, socket
-from threading import Thread, Lock
+from threading import Thread, Semaphore
+from board import Board
+from game import Game
 
 
 
 HOST = "127.0.0.1"
 PORT = 10001
 
-lock = Lock()
 
 
-def serve_client(lock: Lock):    # target for thread object
-    pass
 
+lock_for_game = Semaphore()
+game = Game()
+
+
+t1 = Thread(target=game.create_match_3)
+t2 = Thread(target=game.create_match_4)
+t3 = Thread(target=game.create_match_5)
+t1.start()
+t2.start()
+t3.start()
 
 
 sock = socket(AF_INET, SOCK_STREAM)
