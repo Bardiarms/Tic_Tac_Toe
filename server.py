@@ -2,6 +2,8 @@ from socket import AF_INET, SOCK_STREAM, socket
 from threading import Thread, Semaphore
 from board import Board
 from game import Game
+from server_functions import *
+
 
 
 
@@ -31,3 +33,4 @@ sock.listen(15)
 while (True):
     
     c, addr = sock.accept()
+    t = Thread(target=serve_client, args=(lock_for_game, c, game))

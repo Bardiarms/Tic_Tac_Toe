@@ -1,3 +1,6 @@
+from threading import Semaphore
+
+
 
 
 class Board():
@@ -6,3 +9,4 @@ class Board():
 
         self.dim = dim
         self.game_board = [[0]*dim]*dim 
+        self.board_semaphore = Semaphore()
