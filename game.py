@@ -95,8 +95,7 @@ class Game():
                 
                 if (board.turn == 1):
                     sock.send("Do your move. ".encode())
-                    move = sock.recv(1024).decode()
-                    r, c = parse(move, board.dim)
+                    
                    
                     while(True):
                         move = sock.recv(1024).decode()
@@ -193,8 +192,6 @@ class Game():
                 
                 if (board.turn == 1):
                     sock.send("Do your move. ".encode())
-                    move = sock.recv(1024).decode()
-                    r, c = parse(move, board.dim)
 
                     while(True):
                         move = sock.recv(1024).decode()
@@ -277,8 +274,8 @@ class Game():
 
         else:                           # There is already a player who is waiting for an opponent.
             
-            board = self.waiting4.pop()
-            self.w4s.release()
+            board = self.waiting5.pop()
+            self.w5s.release()
             board.p2 = sock
             board.players[1] = 1
             sock.send("Match started! \nYou are (o).".encode())
@@ -290,9 +287,7 @@ class Game():
                 
                 if (board.turn == 1):
                     sock.send("Do your move. ".encode())
-                    move = sock.recv(1024).decode()
-                    r, c = parse(move, board.dim)
-
+            
                     while(True):
                         move = sock.recv(1024).decode()
                         r, c = parse(move, board.dim)
