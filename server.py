@@ -8,12 +8,12 @@ from server_functions import *
 
 
 HOST = "127.0.0.1"
-PORT = 10001
+PORT = 9005
 
 
 
 
-lock_for_game = Semaphore()
+
 game = Game()
 
 
@@ -22,9 +22,10 @@ sock = socket(AF_INET, SOCK_STREAM)
 sock.bind((HOST,PORT))
 sock.listen(15)
 
+print("Server is Ready")
 
 while (True):
     
     c, addr = sock.accept()
-    t = Thread(target=serve_client, args=(lock_for_game, c, game))
+    t = Thread(target=serve_client, args=(c, game))
     t.start()

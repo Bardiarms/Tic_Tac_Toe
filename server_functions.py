@@ -8,7 +8,8 @@ from threading import Semaphore
 
 
 
-def choose_board(sock: socket):
+def choose_board(sock: socket) -> int:
+    
     msg = "Enter 3 for 3x3, 4 for 4x4 and 5 for 5x5 board: "
     sock.send(msg.encode())
     while (True):
@@ -20,15 +21,25 @@ def choose_board(sock: socket):
 
 
 
-def serve_client(semaphore: Semaphore, sock: socket, game: Game):    # target for thread object
+def serve_client(sock: socket, game: Game):  
+    """Target for thread object. Each client is assigned to one 
+    instance of this method.\n Handles clients request"""  
+
     msg = "Welcome to the Tic-Tac-Toe game!"
     sock.send(msg.encode())
 
     res = choose_board(sock)
 
-    game.add_to_waiting(sock, res)
-
-    msg = "Waiting for an opponent..."
-    sock.send(msg.encode())
+    if (res == 3):
+        game.make_match3(sock)
     
-    game.ready_to_play(sock)
+    elif (res == 4):
+        game.make_match4(sock)
+
+    else:
+        game.make_match5(sock)
+    
+
+   
+    
+    
