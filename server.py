@@ -8,7 +8,7 @@ from server_functions import *
 
 
 HOST = "127.0.0.1"
-PORT = 9005
+PORT = 9000
 
 
 

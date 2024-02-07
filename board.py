@@ -71,7 +71,7 @@ class Board():
                             return True
         
         for i in range(self.dim):
-            if (i-2 < self.dim):
+            if (i+2 < self.dim):
                 for j in range(self.dim):
                     if (j-2 >= 0):
                         if (xo==self.game_board[i][j]==self.game_board[i+1][j-1]==self.game_board[i+2][j-2]):

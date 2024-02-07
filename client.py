@@ -5,7 +5,7 @@ from threading import Thread
 
 
 HOST = "127.0.0.1"
-PORT = 9005
+PORT = 9000
 
 
 sock = socket(AF_INET, SOCK_STREAM)
